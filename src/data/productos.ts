@@ -31,7 +31,7 @@ export const productos: Producto[] = [
     talles: TALLES_ADULTO,
     colores: [BEIGE, GRIS, ROSA_VIEJO],
     destacado: true,
-    foto: false,
+    foto: true,
   },
   {
     slug: "conjunto-mujer-corto",
@@ -59,7 +59,7 @@ export const productos: Producto[] = [
     talles: TALLES_AMPLIO,
     colores: [NEGRO, GRIS, AZUL_MARINO],
     destacado: true,
-    foto: false,
+    foto: true,
   },
   {
     slug: "conjunto-hombre-deportivo",
@@ -86,7 +86,7 @@ export const productos: Producto[] = [
     talles: TALLES_AMPLIO,
     colores: [NEGRO, GRIS, BEIGE, BORDO],
     destacado: true,
-    foto: false,
+    foto: true,
   },
   {
     slug: "buzo-cuello-redondo",
@@ -140,7 +140,7 @@ export const productos: Producto[] = [
     talles: TALLES_AMPLIO,
     colores: [NEGRO, AZUL_MARINO, BORDO],
     destacado: true,
-    foto: false,
+    foto: true,
   },
   {
     slug: "campera-friza",
