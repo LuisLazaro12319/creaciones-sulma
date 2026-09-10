@@ -209,9 +209,9 @@ export default function Home() {
           src={`${BASE_PATH}/fondo-mayorista.jpg`}
           alt=""
           fill
-          className="object-cover opacity-60"
+          className="object-cover opacity-90"
         />
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-gradient-to-t from-black via-black/70 to-black/40">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-gradient-to-t from-black/70 via-black/35 to-black/25">
           <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-acento/20 blur-[140px]" />
         </div>
 
