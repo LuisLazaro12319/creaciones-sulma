@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { productos } from "@/data/productos";
 import { ProductoCard } from "@/components/ProductoCard";
 import { ComoComprar } from "@/components/ComoComprar";
 import { Separador } from "@/components/Separador";
 import { SeccionConFondo } from "@/components/SeccionConFondo";
 import { PromosCarrusel } from "@/components/PromosCarrusel";
-import { FONDOS, MINIMO_MAYORISTA } from "@/lib/config";
+import { BASE_PATH, FONDOS, MINIMO_MAYORISTA } from "@/lib/config";
 
 const BENEFICIOS = [
   {
@@ -63,29 +64,34 @@ export default function Home() {
       `}</style>
 
       {/* HERO PRINCIPAL */}
-      <section className="relative w-full min-h-[85vh] lg:min-h-[90vh] bg-background text-foreground overflow-hidden flex items-center">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute -right-32 top-1/3 h-[560px] w-[560px] -translate-y-1/2 rounded-full bg-acento/25 blur-[130px]" />
-          <div className="absolute -left-24 bottom-0 h-[380px] w-[380px] rounded-full bg-acento/10 blur-[110px]" />
-        </div>
+      <section className="relative w-full min-h-[85vh] lg:min-h-[75vh] text-white overflow-hidden flex items-center">
+        <Image
+          src={`${BASE_PATH}/fondo-hero.jpg`}
+          alt="Conjunto de Creaciones Sulma"
+          fill
+          priority
+          className="object-cover object-top"
+        />
+        <div className="lg:hidden pointer-events-none absolute inset-0 bg-gradient-to-b from-black/15 via-black/55 to-black/75" />
+        <div className="hidden lg:block pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
 
         <div className="relative z-20 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-superficie border border-borde px-3 py-1 text-xs text-tenue">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 text-xs text-white/80">
                 <span className="h-2 w-2 rounded-full bg-acento animate-pulse" />
                 <span className="font-medium tracking-wide uppercase text-[11px]">
                   CONJUNTOS · VENTA POR MAYOR
                 </span>
               </div>
 
-              <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tight leading-[0.95] text-foreground">
+              <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tight leading-[0.95] text-white">
                 CONJUNTOS <br />
                 HOMBRE Y MUJER <br />
                 <span className="text-acento">AL POR MAYOR</span>
               </h1>
 
-              <p className="max-w-xl text-tenue text-sm sm:text-base leading-relaxed">
+              <p className="max-w-xl text-white/80 text-sm sm:text-base leading-relaxed">
                 Elegí los modelos, armá tu pedido por mayor y lo cerramos por WhatsApp — con envíos a todo el país.
               </p>
 
@@ -98,22 +104,22 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/productos?ver=mayorista"
-                  className="inline-flex h-12 items-center justify-center rounded-none border border-borde bg-superficie px-6 text-sm font-bold uppercase tracking-wider text-foreground transition-all hover:bg-superficie/80"
+                  className="inline-flex h-12 items-center justify-center rounded-none border border-white/30 bg-white/10 backdrop-blur-sm px-6 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white/20"
                 >
                   PRECIOS MAYORISTAS
                 </Link>
               </div>
 
-              <div className="border-t border-borde pt-6 mt-8" />
+              <div className="border-t border-white/20 pt-6 mt-8" />
 
               <div className="grid grid-cols-3 gap-4 pt-2">
                 {BENEFICIOS.map((b) => (
                   <div key={b.titulo} className="space-y-1">
                     <div className="mb-2">{b.icon}</div>
-                    <p className="text-[11px] font-semibold text-tenue uppercase tracking-wider">
+                    <p className="text-[11px] font-semibold text-white/70 uppercase tracking-wider">
                       {b.titulo}
                     </p>
-                    <p className="text-xs font-black uppercase text-foreground tracking-wide">
+                    <p className="text-xs font-black uppercase text-white tracking-wide">
                       {b.sub}
                     </p>
                   </div>
@@ -123,7 +129,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hidden lg:block absolute right-4 top-1/2 -translate-y-1/2 rotate-90 origin-right text-[10px] font-bold tracking-[0.4em] text-tenue/50 uppercase select-none z-30 pointer-events-none">
+        <div className="hidden lg:block absolute right-4 top-1/2 -translate-y-1/2 rotate-90 origin-right text-[10px] font-bold tracking-[0.4em] text-white/40 uppercase select-none z-30 pointer-events-none">
           CONJUNTOS · CALIDAD · MAYORISTA
         </div>
       </section>
