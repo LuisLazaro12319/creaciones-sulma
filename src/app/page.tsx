@@ -205,19 +205,17 @@ export default function Home() {
 
       {/* SECCIÓN MAYORISTA */}
       <section className="relative w-full lg:min-h-[680px] bg-black text-white flex items-center justify-center overflow-hidden py-16 sm:py-24 px-4">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <Image
+          src={`${BASE_PATH}/fondo-mayorista.jpg`}
+          alt=""
+          fill
+          className="object-cover opacity-60"
+        />
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-gradient-to-t from-black via-black/70 to-black/40">
           <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-acento/20 blur-[140px]" />
         </div>
 
         <div className="relative z-20 mx-auto max-w-3xl text-center space-y-6">
-          <div className="flex items-center justify-center gap-4">
-            <span className="h-[1px] w-12 bg-acento/60 hidden sm:block" />
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-white/90">
-              TU RITMO, TU ACTITUD
-            </p>
-            <span className="h-[1px] w-12 bg-acento/60 hidden sm:block" />
-          </div>
-
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none text-white">
             COMPRÁ <span className="text-acento">MAYORISTA</span>
           </h2>
