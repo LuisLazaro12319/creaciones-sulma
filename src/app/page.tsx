@@ -64,34 +64,38 @@ export default function Home() {
       `}</style>
 
       {/* HERO PRINCIPAL */}
-      <section className="relative w-full min-h-[85vh] lg:min-h-[75vh] text-white overflow-hidden flex items-center">
-        <Image
-          src={`${BASE_PATH}/fondo-hero.jpg`}
-          alt="Conjunto de Creaciones Sulma"
-          fill
-          priority
-          className="object-cover object-top"
-        />
-        <div className="lg:hidden pointer-events-none absolute inset-0 bg-gradient-to-b from-black/15 via-black/55 to-black/75" />
-        <div className="hidden lg:block pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
+      <section className="relative w-full min-h-[85vh] lg:min-h-[90vh] bg-background text-foreground overflow-hidden flex items-center">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <Image
+            src={`${BASE_PATH}/fondo-hero.jpg`}
+            alt="Conjunto de Creaciones Sulma"
+            fill
+            priority
+            className="object-cover object-top"
+          />
+          <div className="absolute inset-y-0 left-0 w-full lg:w-[60%] bg-gradient-to-r from-background via-background/70 to-transparent z-10 hidden lg:block" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background lg:hidden z-10" />
+          <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-background to-transparent z-10" />
+          <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-background to-transparent z-10" />
+        </div>
 
         <div className="relative z-20 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 text-xs text-white/80">
+              <div className="inline-flex items-center gap-2 rounded-full bg-superficie border border-borde px-3 py-1 text-xs text-tenue">
                 <span className="h-2 w-2 rounded-full bg-acento animate-pulse" />
                 <span className="font-medium tracking-wide uppercase text-[11px]">
                   CONJUNTOS · VENTA POR MAYOR
                 </span>
               </div>
 
-              <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tight leading-[0.95] text-white">
+              <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tight leading-[0.95] text-foreground">
                 CONJUNTOS <br />
                 HOMBRE Y MUJER <br />
                 <span className="text-acento">AL POR MAYOR</span>
               </h1>
 
-              <p className="max-w-xl text-white/80 text-sm sm:text-base leading-relaxed">
+              <p className="max-w-xl text-tenue text-sm sm:text-base leading-relaxed">
                 Elegí los modelos, armá tu pedido por mayor y lo cerramos por WhatsApp — con envíos a todo el país.
               </p>
 
@@ -104,22 +108,22 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/productos?ver=mayorista"
-                  className="inline-flex h-12 items-center justify-center rounded-none border border-white/30 bg-white/10 backdrop-blur-sm px-6 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white/20"
+                  className="inline-flex h-12 items-center justify-center rounded-none border border-borde bg-superficie px-6 text-sm font-bold uppercase tracking-wider text-foreground transition-all hover:bg-superficie/80"
                 >
                   PRECIOS MAYORISTAS
                 </Link>
               </div>
 
-              <div className="border-t border-white/20 pt-6 mt-8" />
+              <div className="border-t border-borde pt-6 mt-8" />
 
               <div className="grid grid-cols-3 gap-4 pt-2">
                 {BENEFICIOS.map((b) => (
                   <div key={b.titulo} className="space-y-1">
                     <div className="mb-2">{b.icon}</div>
-                    <p className="text-[11px] font-semibold text-white/70 uppercase tracking-wider">
+                    <p className="text-[11px] font-semibold text-tenue uppercase tracking-wider">
                       {b.titulo}
                     </p>
-                    <p className="text-xs font-black uppercase text-white tracking-wide">
+                    <p className="text-xs font-black uppercase text-foreground tracking-wide">
                       {b.sub}
                     </p>
                   </div>
@@ -129,7 +133,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hidden lg:block absolute right-4 top-1/2 -translate-y-1/2 rotate-90 origin-right text-[10px] font-bold tracking-[0.4em] text-white/40 uppercase select-none z-30 pointer-events-none">
+        <div className="hidden lg:block absolute right-4 top-1/2 -translate-y-1/2 rotate-90 origin-right text-[10px] font-bold tracking-[0.4em] text-tenue/50 uppercase select-none z-30 pointer-events-none">
           CONJUNTOS · CALIDAD · MAYORISTA
         </div>
       </section>
