@@ -65,7 +65,8 @@ export default function Home() {
 
       {/* HERO PRINCIPAL */}
       <section className="relative w-full min-h-[85vh] lg:min-h-[90vh] bg-background text-foreground overflow-hidden flex items-center">
-        <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Mobile: foto de fondo completa, atenuada */}
+        <div className="absolute inset-0 lg:hidden pointer-events-none z-0">
           <Image
             src={`${BASE_PATH}/fondo-hero.jpg`}
             alt="Conjunto de Creaciones Sulma"
@@ -73,11 +74,24 @@ export default function Home() {
             priority
             className="object-cover object-top"
           />
-          <div className="absolute inset-y-0 left-0 w-full lg:w-[60%] bg-gradient-to-r from-background via-background/70 to-transparent z-10 hidden lg:block" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background lg:hidden z-10" />
-          <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-background to-transparent z-10" />
-          <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-background to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background" />
         </div>
+
+        {/* Desktop: panel a la derecha, foto a su tamaño real (nunca agrandada) */}
+        <div className="hidden lg:flex absolute inset-y-0 right-0 w-1/2 xl:w-[45%] items-center justify-center pointer-events-none z-0 overflow-hidden">
+          <Image
+            src={`${BASE_PATH}/fondo-hero.jpg`}
+            alt="Conjunto de Creaciones Sulma"
+            width={812}
+            height={850}
+            priority
+            className="w-auto h-auto max-w-full max-h-full"
+          />
+          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background to-transparent" />
+        </div>
+
+        <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
 
         <div className="relative z-20 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
