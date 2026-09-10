@@ -78,11 +78,11 @@ function IconoFoto() {
   );
 }
 
-/* Bloque UNIFICADO fotos + colores (demo real del formulario de carga).
-   Color principal con varias fotos + otros colores con una foto cada uno. */
+/* Bloque de fotos (generales del producto, no por color) + colores disponibles
+   (solo etiquetas, sin foto propia — elegir color no cambia ninguna imagen). */
 function BloqueFotosColores() {
-  const PRINCIPAL = { hex: "#e5a7bd", n: "Rosa" };
-  const [extras, setExtras] = useState([
+  const [colores, setColores] = useState([
+    { hex: "#e5a7bd", n: "Rosa" },
     { hex: "#a9cfe8", n: "Celeste" },
     { hex: "#1c1c1c", n: "Negro" },
   ]);
@@ -91,17 +91,25 @@ function BloqueFotosColores() {
   const [nombre, setNombre] = useState("");
 
   function agregar() {
-    setExtras((prev) => [...prev, { hex, n: nombre.trim() || "Color" }]);
+    setColores((prev) => [...prev, { hex, n: nombre.trim() || "Color" }]);
     setNombre("");
     setHex("#c4b0dd");
     setAbierto(false);
   }
 
-  function Pastilla({ hex, n }: { hex: string; n: string }) {
+  function Pastilla({ hex, n, onQuitar }: { hex: string; n: string; onQuitar: () => void }) {
     return (
-      <span className="flex items-center gap-1.5 rounded-full border border-borde bg-superficie py-1 pl-1 pr-2.5 text-xs">
+      <span className="flex items-center gap-1.5 rounded-full border border-borde bg-superficie py-1 pl-1 pr-2 text-xs">
         <span className="h-5 w-5 rounded-full border border-borde" style={{ backgroundColor: hex }} />
         {n}
+        <button
+          type="button"
+          onClick={onQuitar}
+          className="ml-0.5 text-tenue transition-colors hover:text-[#c0392b]"
+          aria-label={`Quitar ${n}`}
+        >
+          ×
+        </button>
       </span>
     );
   }
@@ -110,92 +118,66 @@ function BloqueFotosColores() {
     <div className="rounded-xl border border-borde bg-superficie/40 p-4 sm:col-span-2">
       <h3 className="text-sm font-semibold">Fotos y colores</h3>
       <p className="mt-0.5 text-xs text-tenue">
-        Cargá el <strong className="text-foreground">color principal</strong> con sus fotos y después sumá los otros colores. Todo va dentro de <strong className="text-foreground">este mismo producto</strong>.
+        Subí las fotos del producto y marcá en qué colores lo tenés. La foto no cambia según el color — el cliente elige el color aparte al hacer el pedido.
       </p>
 
-      {/* COLOR PRINCIPAL */}
-      <div className="mt-4 rounded-lg border border-acento/40 bg-background p-3.5">
-        <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-acento/15 px-2 py-0.5 text-[11px] font-semibold text-acento">Color principal</span>
-          <span className="text-[11px] text-tenue">es el que se ve al abrir la prenda</span>
-        </div>
+      {/* FOTOS DEL PRODUCTO */}
+      <div className="mt-4 rounded-lg border border-borde bg-background p-3.5">
+        <p className="mb-3 text-[11px] font-semibold text-foreground">Fotos del producto</p>
         <div className="flex flex-wrap items-center gap-3">
-          <Pastilla hex={PRINCIPAL.hex} n={PRINCIPAL.n} />
-          <div className="flex items-center gap-2">
-            {[0, 1, 2].map((i) => (
-              <span key={i} className="flex h-14 w-12 items-center justify-center rounded-lg border border-dashed border-borde bg-superficie text-tenue">
-                <IconoFoto />
-              </span>
-            ))}
-            <span className="text-[11px] text-tenue">varias fotos<br />(frente, espalda…)</span>
-          </div>
+          {[0, 1, 2].map((i) => (
+            <span key={i} className="flex h-14 w-12 items-center justify-center rounded-lg border border-dashed border-borde bg-superficie text-tenue">
+              <IconoFoto />
+            </span>
+          ))}
+          <span className="text-[11px] text-tenue">varias fotos<br />(frente, espalda…)</span>
         </div>
       </div>
 
-      {/* OTROS COLORES */}
-      {extras.length > 0 && (
-        <div className="mt-3 space-y-2">
-          {extras.map((c, i) => (
-            <div key={`${c.n}-${i}`} className="flex flex-wrap items-center gap-3 rounded-lg border border-borde bg-background p-2.5">
-              <Pastilla hex={c.hex} n={c.n} />
-              <span className="flex h-12 w-10 items-center justify-center rounded-lg border border-dashed border-borde bg-superficie text-tenue">
-                <IconoFoto />
-              </span>
-              <span className="text-[11px] text-tenue">su foto</span>
-              <button
-                type="button"
-                onClick={() => setExtras((prev) => prev.filter((_, j) => j !== i))}
-                className="ml-auto text-tenue transition-colors hover:text-[#c0392b]"
-                aria-label={`Quitar ${c.n}`}
-              >
-                ×
-              </button>
-            </div>
+      {/* COLORES DISPONIBLES */}
+      <div className="mt-3 rounded-lg border border-borde bg-background p-3.5">
+        <p className="mb-3 text-[11px] font-semibold text-foreground">Colores disponibles</p>
+        <div className="flex flex-wrap gap-2">
+          {colores.map((c, i) => (
+            <Pastilla
+              key={`${c.n}-${i}`}
+              hex={c.hex}
+              n={c.n}
+              onQuitar={() => setColores((prev) => prev.filter((_, j) => j !== i))}
+            />
           ))}
         </div>
-      )}
 
-      {/* AGREGAR OTRO COLOR */}
-      <button
-        type="button"
-        onClick={() => setAbierto((v) => !v)}
-        className="mt-3 flex items-center gap-1.5 rounded-none border border-dashed border-acento px-3 py-1.5 text-xs font-medium text-acento transition-colors hover:bg-acento/10"
-      >
-        <span className="flex h-5 w-5 items-center justify-center rounded-none border border-dashed border-acento">+</span>
-        Agregar otro color
-      </button>
+        <button
+          type="button"
+          onClick={() => setAbierto((v) => !v)}
+          className="mt-3 flex items-center gap-1.5 rounded-none border border-dashed border-acento px-3 py-1.5 text-xs font-medium text-acento transition-colors hover:bg-acento/10"
+        >
+          <span className="flex h-5 w-5 items-center justify-center rounded-none border border-dashed border-acento">+</span>
+          Agregar color
+        </button>
 
-      {abierto && (
-        <div className="mt-3 rounded-xl border border-acento/40 bg-background p-4">
-          <p className="mb-3 text-xs font-semibold text-foreground">Nuevo color</p>
-          <div className="flex flex-wrap items-end gap-4">
-            <div>
-              <label className="mb-1 block text-[11px] text-tenue">Tono</label>
-              <input type="color" value={hex} onChange={(e) => setHex(e.target.value)}
-                className="h-10 w-14 cursor-pointer rounded-none border border-borde bg-background p-1" />
+        {abierto && (
+          <div className="mt-3 rounded-xl border border-acento/40 bg-superficie p-4">
+            <div className="flex flex-wrap items-end gap-4">
+              <div>
+                <label className="mb-1 block text-[11px] text-tenue">Tono</label>
+                <input type="color" value={hex} onChange={(e) => setHex(e.target.value)}
+                  className="h-10 w-14 cursor-pointer rounded-none border border-borde bg-background p-1" />
+              </div>
+              <div className="min-w-[130px] flex-1">
+                <label className="mb-1 block text-[11px] text-tenue">Nombre</label>
+                <input value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Ej: Lila"
+                  className="w-full rounded-lg border border-borde bg-background px-3 py-2 text-sm text-foreground placeholder:text-tenue/60" />
+              </div>
+              <button type="button" onClick={agregar}
+                className="rounded-none bg-acento px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90">
+                Agregar
+              </button>
             </div>
-            <div className="min-w-[130px] flex-1">
-              <label className="mb-1 block text-[11px] text-tenue">Nombre</label>
-              <input value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Ej: Lila"
-                className="w-full rounded-lg border border-borde bg-background px-3 py-2 text-sm text-foreground placeholder:text-tenue/60" />
-            </div>
-            <div>
-              <label className="mb-1 block text-[11px] text-tenue">Foto de este color</label>
-              <span className="flex items-center gap-2 rounded-lg border border-dashed border-borde bg-background px-3 py-2 text-xs text-tenue">
-                📷 Subir
-              </span>
-            </div>
-            <button type="button" onClick={agregar}
-              className="rounded-none bg-acento px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90">
-              Agregar
-            </button>
           </div>
-          <p className="mt-3 flex items-center gap-2 text-[11px] text-tenue">
-            <span className="inline-block h-4 w-4 rounded-full border border-borde" style={{ backgroundColor: hex }} />
-            Al tocar este color en la tienda, la foto grande cambia a la de este color.
-          </p>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
