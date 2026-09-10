@@ -24,12 +24,8 @@ export function FichaProducto({ producto }: { producto: Producto }) {
   const unitario = precioDe(producto);
   const faltaElegirTalle = talle === null;
 
-  // Foto grande: la del color elegido si tiene; si no, la principal del producto.
-  const fotoPrincipal = color.foto
-    ? `${BASE_PATH}/prod/${color.foto}`
-    : producto.foto
-      ? `${BASE_PATH}/prod/${producto.slug}.jpg`
-      : null;
+  // Foto grande: siempre la principal del producto (no cambia al elegir color).
+  const fotoPrincipal = producto.foto ? `${BASE_PATH}/prod/${producto.slug}.jpg` : null;
 
   function handleAgregar() {
     if (!talle || producto.sinStock) return;
@@ -48,7 +44,7 @@ export function FichaProducto({ producto }: { producto: Producto }) {
             {fotoPrincipal ? (
               <Image
                 src={fotoPrincipal}
-                alt={`${producto.nombre} — ${color.nombre}`}
+                alt={producto.nombre}
                 width={640}
                 height={800}
                 className="h-full w-full object-cover"
@@ -56,41 +52,12 @@ export function FichaProducto({ producto }: { producto: Producto }) {
             ) : (
               <PrendaPlaceholder
                 categoria={producto.categoria}
-                hex={color.hex}
+                hex={producto.colores[0].hex}
                 nombre={producto.nombre}
               />
             )}
           </div>
         </div>
-
-        {/* Galería: una miniatura por color. Tocarla cambia la foto grande. */}
-        <div className="mt-3 flex flex-wrap gap-3">
-          {producto.colores.map((c) => {
-            const src = c.foto ? `${BASE_PATH}/prod/${c.foto}` : null;
-            const activo = color.nombre === c.nombre;
-            return (
-              <button
-                key={c.nombre}
-                type="button"
-                onClick={() => setColor(c)}
-                aria-label={c.nombre}
-                aria-pressed={activo}
-                className={`h-20 w-16 overflow-hidden rounded-none border-2 transition-colors ${
-                  activo ? "border-acento" : "border-borde hover:border-tenue"
-                }`}
-              >
-                {src ? (
-                  <Image src={src} alt={c.nombre} width={128} height={160} className="h-full w-full object-cover" />
-                ) : (
-                  <PrendaPlaceholder categoria={producto.categoria} hex={c.hex} nombre="" />
-                )}
-              </button>
-            );
-          })}
-        </div>
-        <p className="mt-2 text-xs text-tenue">
-          Tocá un color y la foto cambia. Cada color puede tener su propia foto.
-        </p>
       </div>
 
       <div>

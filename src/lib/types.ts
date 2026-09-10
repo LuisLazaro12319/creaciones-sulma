@@ -10,9 +10,6 @@ export type Color = {
   nombre: string;
   /** Hex usado para el swatch y para el placeholder mientras no haya fotos. */
   hex: string;
-  /** Nombre del archivo en /public/prod/ con la foto de la prenda en ESTE color.
-   *  Al tocar el color en la ficha, la foto principal cambia a esta. Opcional. */
-  foto?: string;
 };
 
 export type Producto = {
