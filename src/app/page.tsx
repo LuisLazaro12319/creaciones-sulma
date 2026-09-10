@@ -74,7 +74,7 @@ export default function Home() {
             priority
             className="object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/85" />
         </div>
 
         {/* Desktop: panel a la derecha, foto rellenando todo el panel (sin espacios) */}
