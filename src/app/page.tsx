@@ -77,17 +77,20 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background" />
         </div>
 
-        {/* Desktop: panel a la derecha, foto a su tamaño real (nunca agrandada) */}
-        <div className="hidden lg:flex absolute inset-y-0 right-0 w-1/2 xl:w-[45%] items-center justify-center pointer-events-none z-0 overflow-hidden">
-          <Image
-            src={`${BASE_PATH}/fondo-hero.jpg`}
-            alt="Conjunto de Creaciones Sulma"
-            width={812}
-            height={850}
-            priority
-            className="w-auto h-auto max-w-full max-h-full"
-          />
-          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background to-transparent" />
+        {/* Desktop: panel a la derecha, foto a su tamaño real (nunca agrandada), apoyada abajo */}
+        <div className="hidden lg:flex absolute inset-y-0 right-0 w-1/2 xl:w-[45%] items-end justify-center pointer-events-none z-0 overflow-hidden">
+          <div className="relative">
+            <Image
+              src={`${BASE_PATH}/fondo-hero.jpg`}
+              alt="Conjunto de Creaciones Sulma"
+              width={812}
+              height={850}
+              priority
+              className="block w-auto h-auto max-w-full max-h-full"
+            />
+            <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-background via-background/60 to-transparent" />
+          </div>
         </div>
 
         <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
